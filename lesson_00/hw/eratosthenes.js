@@ -9,27 +9,20 @@ console - вывод результата на экран
 
 function Eratosthenes(max) {
   this.rice = [];
-  this.max = max;
-  for (i = 1; i <= max; i++) { this.rice[i] = true; }
+  for (i = 2; i <= max; i++) { this.rice[i] = true; }
 }
 
 Eratosthenes.prototype.fill = function() {
-  var max = this.max;
-  for (i = 2; i <= max; i++) {
-    if (i){
-      for (j = i + 1; j <= max; j++) {
-        if (!(j%i)) {
-          this.rice[j] = false;
-        }
-      }
-    }
+  for (i = 2; i <= this.rice.length; i++) {
+    if (!this.rice[i]) { continue; }
+    for (j = 2 * i; j <= this.rice.length; j += i) { this.rice[j] = false; }
   }
 };
 
 Eratosthenes.prototype.console = function() {
   this.rice.forEach(function(item, index){
     if (!item) { return; }
-    console.log(index + " is " + item);
+    console.log(index);
   })
 };
 
